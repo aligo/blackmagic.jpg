@@ -38,16 +38,23 @@ xhr.onload = (e) ->
     ba = new Uint8Array xhr.response
     bebs = new BigEndianBinaryStream ba
 
+    secret = null
+
     while bebs.haveNext()
       if bebs.getNextBytesAsNumber(2) == JPEG_END_NUMBER
         if bebs.getByteRangeAsNumber(bebs.currentByteIndex, 2) == JPEG_HEAD_NUMBER
           secret = bebs.stream.subarray bebs.currentByteIndex, bebs.stream.length
+          break
 
-          console.log secret.length
+    i = secret.length
+    str_array = new Array i
 
-          blob = String.fromCharCode.apply null, secret # T_T
+    while i--
+      str_array[i] = String.fromCharCode secret[i]
 
-          console.log blob
+    data = str_array.join ''
+
+    document.getElementById('the-target').src = "data:image/jpeg;base64,"+ btoa(data)
 
 
 xhr.send null
