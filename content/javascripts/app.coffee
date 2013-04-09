@@ -41,7 +41,13 @@ xhr.onload = (e) ->
     while bebs.haveNext()
       if bebs.getNextBytesAsNumber(2) == JPEG_END_NUMBER
         if bebs.getByteRangeAsNumber(bebs.currentByteIndex, 2) == JPEG_HEAD_NUMBER
-          console.log bebs.currentByteIndex # another file start at
+          secret = bebs.stream.subarray bebs.currentByteIndex, bebs.stream.length
+
+          console.log secret.length
+
+          blob = String.fromCharCode.apply null, secret # T_T
+
+          console.log blob
 
 
 xhr.send null
