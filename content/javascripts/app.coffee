@@ -20,7 +20,7 @@ class BigEndianBinaryStream
 
   getByteRangeAsNumber: (index, steps) ->
     result = 0
-    i = index + steps - 1;
+    i = index + steps - 1
     while i >= index
       result = (result << 8) + @stream[i]
       i--
