@@ -1,5 +1,4 @@
 
-JPEG_MAGIC_NUMBER = 0xd8ffd9ff
 JPEG_HEAD_NUMBER = 0xd8ff
 JPEG_END_NUMBER  = 0xd9ff
 
@@ -31,7 +30,7 @@ class BigEndianBinaryStream
     ( @currentByteIndex < @stream.length )
 
 xhr = new XMLHttpRequest()
-xhr.open 'GET', '/c.jpg', true
+xhr.open 'GET', '/test.jpg', true
 xhr.responseType = 'arraybuffer'
 xhr.onload = (e) ->
   if xhr.response
